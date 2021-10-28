@@ -1,0 +1,60 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container">
+  <section>
+    <h1>Create a Restaurant</h1>
+
+    <form action="/api/restaurants" method="post">
+      <div class="form-group">
+        <label for="restaurants-input--name">Restaurant Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          id="restaurant-input--name"
+          placeholder="Enter restaurant name"
+        />
+      </div>
+      <div class="form-group mb-1">
+        <label for="restaurants-input--image">Image Link</label>
+        <input
+          type="text"
+          name="image"
+          class="form-control"
+          id="restaurant-input--image"
+          placeholder="https://www.example-image-url.com..."
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Restaurants</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% restaurants.map((restaurant) => { %>
+
+      <div class="col">
+        <div class="card h-100">
+          <img
+            src="<%= restaurant.dataValues.image %>"
+            style="max-width: 286; max-height: 180"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title mt-auto">
+              <%= restaurant.dataValues.name %>
+            </h5>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <% }) %>
+    </div>
+  </section>
+</div>
+
+<%- include("../partials/footer.ejs")%>
