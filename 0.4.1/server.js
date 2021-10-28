@@ -1,13 +1,21 @@
 const express = require("express");
 
 const rootRoutes = require("./routes/rootRoutes");
+const apiRoutes = require("./routes/apiRoutes");
 
 const app = express();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
+
+app.use(express.static("views"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // root routes
 app.use("/", rootRoutes);
+
+// api routes
+app.use("/api", apiRoutes);
 
 app.listen(port, (error) => {
   if (error) console.log(error);
