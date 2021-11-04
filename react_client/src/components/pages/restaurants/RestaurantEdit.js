@@ -20,7 +20,7 @@ class RestaurantEdit extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="ui container">
         <h3>Edit Restaurant Details</h3>
         <RestaurantForm
           initialValues={_.pick(this.props.restaurant, "name", "image")}

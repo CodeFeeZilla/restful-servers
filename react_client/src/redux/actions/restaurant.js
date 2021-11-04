@@ -6,6 +6,7 @@ export const fetchRestaurants = () => async (disptach) => {
   const response = await restaurantsApi.get("/restaurants");
 
   disptach({ type: types.FETCH_RESTAURANTS, payload: response.data });
+  disptach({ type: types.SELECT_RESTAURANT, payload: null });
 };
 
 export const fetchRestaurant = (id) => async (dispatch) => {

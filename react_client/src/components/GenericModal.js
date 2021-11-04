@@ -1,13 +1,14 @@
 import React from "react";
-import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { Button, Image, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { deleteRestaurant } from "./../redux/actions/restaurant";
 
-function DeleteModal({ item, deleteRestaurant }) {
+function GenericModal({ item, deleteRestaurant, handleDelete, label }) {
   const [open, setOpen] = React.useState(false);
+  const { title, name } = item;
 
   const onDeleteClick = () => {
-    deleteRestaurant(item.id);
+    handleDelete(item.id);
     setOpen(false);
   };
 
@@ -24,12 +25,12 @@ function DeleteModal({ item, deleteRestaurant }) {
         </Button>
       }
     >
-      <Modal.Header>Delete Restaurant: {item.name}</Modal.Header>
-      <Modal.Content image>
-        <Image size="medium" src={item.image} wrapped />
+      <Modal.Header>
+        Delete {label}: {title || name}
+      </Modal.Header>
+      <Modal.Content>
         <Modal.Description>
-          {/* <Header>{item.name}</Header> */}
-          <p>Are you sure you want to delete this restaurant?</p>
+          <p>Are you sure you want to delete this {label}?</p>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
@@ -49,4 +50,4 @@ function DeleteModal({ item, deleteRestaurant }) {
   );
 }
 
-export default connect(null, { deleteRestaurant })(DeleteModal);
+export default GenericModal;

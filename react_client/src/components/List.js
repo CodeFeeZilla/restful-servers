@@ -5,7 +5,8 @@ import DeleteModal from "./Modal";
 
 const List = ({ items }) => {
   const renderedList = items.map((item) => {
-    console.log(item);
+    if (!item) return null;
+
     return (
       <Card key={item.id}>
         <Image src={item.image} wrapped ui={false} />
@@ -14,9 +15,12 @@ const List = ({ items }) => {
         </Card.Content>
         <Card.Content extra>
           <div className="ui three buttons">
-            <Button basic color="grey">
+            <Link
+              to={`/restaurants/${item.id}/menus`}
+              className="ui grey basic button"
+            >
               View
-            </Button>
+            </Link>
             <Link
               to={`/restaurants/edit/${item.id}`}
               className="ui blue basic button"
