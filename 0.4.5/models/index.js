@@ -10,18 +10,26 @@ const MenuItem = sequelize.define("MenuItem", menuItemModel);
 
 // one-to-one relationship
 Menu.belongsTo(Restaurant, {
-  foreignKey: "restaurant_id",
+  foreignKey: { name: "restaurant_id", allowNull: false },
+  onDelete: "CASCADE",
 });
 
 // one-to-one relationship
-MenuItem.belongsTo(Menu);
-
-// one-to-many relationship
-Restaurant.hasMany(Menu, {
-  as: "restaurant_id",
+MenuItem.belongsTo(Menu, {
+  foreignKey: { name: "menu_id", allowNull: false },
+  onDelete: "CASCADE",
 });
 
 // one-to-many relationship
-Menu.hasMany(MenuItem);
+Restaurant.hasMany(Menu, {
+  foreignKey: { name: "restaurant_id", allowNull: false },
+  onDelete: "CASCADE",
+});
+
+// one-to-many relationship
+Menu.hasMany(MenuItem, {
+  foreignKey: { name: "menu_id", allowNull: false },
+  onDelete: "CASCADE",
+});
 
 module.exports = { Restaurant, Menu, MenuItem };

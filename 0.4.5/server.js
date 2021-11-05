@@ -1,8 +1,9 @@
 const express = require("express");
 const sequelize = require("./sequelize");
-const restaurantApi = require("./routes/restaurantApi");
-const menuApi = require("./routes/menuApi");
-const menuItemApi = require("./routes/menuItemApi");
+const restaurantRouter = require("./routes/restaurant/restaurantApi");
+const menuRouter = require("./routes/menu/menuApi");
+const cors = require("cors");
+// const menuItemApi = require("./routes/menuItemApi");
 
 const app = express();
 
@@ -10,14 +11,11 @@ const port = process.env.PORT || 8000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // restaurant api routes
-app.use("/api/restaurants", restaurantApi);
-
-// menu api
-app.use("/api/menu", menuApi);
-
-app.use("/api/menu-item", menuItemApi);
+app.use("/api/restaurants", restaurantRouter);
+app.use("/api/menus", menuRouter);
 
 async function start() {
   await sequelize.sync({
