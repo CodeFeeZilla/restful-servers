@@ -10,7 +10,7 @@ const restaurantReducer = (state = {}, action) => {
     case types.EDIT_RESTAURANT:
       return { ...state, [action.payload.id]: action.payload };
     case types.DELETE_RESTAURANT:
-      return { ...state, [action.payload.id]: null };
+      return { ...state, [action.payload]: null };
     default:
       return state;
   }

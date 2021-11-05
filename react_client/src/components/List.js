@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Image, Button } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import DeleteModal from "./Modal";
 
 const List = ({ items }) => {

@@ -1,13 +1,7 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
-import Select from "react-select";
-import { Form as SForm } from "semantic-ui-react";
 
 const MenuForm = (props) => {
-  const id = props.initialValues
-    ? props.initialValues.restaurant_id || props.initialValues.menuId
-    : null;
-
   const renderError = ({ error, touched }) => {
     if (touched && error) {
       return (
@@ -29,36 +23,36 @@ const MenuForm = (props) => {
     );
   };
 
-  const renderDropDown = ({
-    input,
-    label,
-    meta,
-    options,
-    selected,
-    ...rest
-  }) => {
-    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
-    return (
-      <div className={className}>
-        <label>{label}</label>
-        <Select
-          {...input}
-          {...rest}
-          fluid
-          options={options}
-          placeholder="Restaurant"
-          value={options.find((option) => option.value === id)}
-        />
-        {renderError(meta)}
-      </div>
-    );
-  };
+  //   const renderDropDown = ({
+  //     input,
+  //     label,
+  //     meta,
+  //     options,
+  //     selected,
+  //     ...rest
+  //   }) => {
+  //     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+  //     return (
+  //       <div className={className}>
+  //         <label>{label}</label>
+  //         <Select
+  //           {...input}
+  //           {...rest}
+  //           fluid
+  //           options={options}
+  //           placeholder="Restaurant"
+  //           value={options.find((option) => option.value === id)}
+  //         />
+  //         {renderError(meta)}
+  //       </div>
+  //     );
+  //   };
 
   const onSubmit = (formValues) => {
     console.log(formValues);
     props.onSubmit({
       title: formValues.title,
-      restaurant_id: formValues.restaurant_id.value,
+      restaurant_id: props.id,
     });
   };
 
@@ -73,10 +67,10 @@ const MenuForm = (props) => {
           errors.title = "You must enter a title";
         }
 
-        if (!formValues.restaurant_id) {
-          errors.restaurant_id =
-            "You must state which restaurant the menu belongs to";
-        }
+        // if (!formValues.restaurant_id) {
+        //   errors.restaurant_id =
+        //     "You must state which restaurant the menu belongs to";
+        // }
 
         return errors;
       }}
@@ -87,12 +81,12 @@ const MenuForm = (props) => {
             component={renderInput}
             label="Enter a Menu Title"
           />
-          <Field
+          {/* <Field
             name="restaurant_id"
             component={renderDropDown}
             label="Select Which Restaurant the Menu Belongs To"
             options={props.options}
-          />
+          /> */}
           <button className="ui primary button">Submit</button>
         </form>
       )}

@@ -10,7 +10,7 @@ const itemReducer = (state = {}, action) => {
     case types.EDIT_ITEM:
       return { ...state, [action.payload.id]: action.payload };
     case types.DELETE_ITEM:
-      return { ...state, [action.payload.id]: null };
+      return { ...state, [action.payload]: null };
     default:
       return state;
   }

@@ -20,6 +20,7 @@ class MenuCreate extends React.Component {
           selectLabel="Select Which Restaurant Menu Belongs To"
           selectFieldName="restaurant_id"
           options={this.props.options}
+          id={this.props.match.params.id}
         />
       </div>
     );

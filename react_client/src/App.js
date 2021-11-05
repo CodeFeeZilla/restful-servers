@@ -12,6 +12,7 @@ import MenuEdit from "./components/pages/menus/MenuEdit";
 
 import ItemList from "./components/pages/menuItems/ItemList";
 import ItemCreate from "./components/pages/menuItems/ItemCreate";
+import ItemEdit from "./components/pages/menuItems/ItemEdit";
 
 import history from "./history";
 
@@ -51,9 +52,14 @@ const App = () => {
             component={ItemList}
           />
           <Route
-            path="/menus/:id/menu-items/create"
+            path="/restaurants/:id/menus/:menuId/menu-items/create"
             exact
             component={ItemCreate}
+          />
+          <Route
+            path="/restaurants/:id/menus/:menuId/menu-items/:itemId/edit"
+            exact
+            component={ItemEdit}
           />
         </Switch>
       </Router>

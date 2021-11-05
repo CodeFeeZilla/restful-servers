@@ -1,13 +1,7 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
-import Select from "react-select";
-import { Form as SForm } from "semantic-ui-react";
 
 const ItemForm = (props) => {
-  const id = props.initialValues
-    ? props.initialValues.restaurant_id || props.initialValues.menuId
-    : null;
-
   const renderError = ({ error, touched }) => {
     if (touched && error) {
       return (
@@ -29,38 +23,38 @@ const ItemForm = (props) => {
     );
   };
 
-  const renderDropDown = ({
-    input,
-    label,
-    meta,
-    options,
-    selected,
-    ...rest
-  }) => {
-    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
-    return (
-      <div className={className}>
-        <label>{label}</label>
-        <Select
-          {...input}
-          {...rest}
-          fluid
-          options={options}
-          placeholder="Restaurant"
-          //   value={options.find((option) => option.value === id).value}
-        />
-        {renderError(meta)}
-      </div>
-    );
-  };
+  //   const renderDropDown = ({
+  //     input,
+  //     label,
+  //     meta,
+  //     options,
+  //     selected,
+  //     ...rest
+  //   }) => {
+  //     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+  //     return (
+  //       <div className={className}>
+  //         <label>{label}</label>
+  //         <Select
+  //           {...input}
+  //           {...rest}
+  //           fluid
+  //           options={options}
+  //           placeholder="Restaurant"
+  //           value={options.find((option) => option.value === id)}
+  //           //   value={options.find((option) => option.value === id).value}
+  //         />
+  //         {renderError(meta)}
+  //       </div>
+  //     );
+  //   };
 
   const onSubmit = (formValues) => {
     console.log(formValues);
 
     props.onSubmit({
-      name: formValues.name,
-      price: formValues.price,
-      menu_id: formValues.menu_id.value,
+      ...formValues,
+      price: parseFloat(formValues.price).toFixed(2),
     });
   };
 
@@ -79,9 +73,9 @@ const ItemForm = (props) => {
           errors.price = "You must enter a price";
         }
 
-        if (!formValues.menu_id) {
-          errors.menu_id = "You must state which menu the item belongs to";
-        }
+        // if (!formValues.menu_id) {
+        //   errors.menu_id = "You must state which menu the item belongs to";
+        // }
 
         return errors;
       }}
@@ -93,12 +87,12 @@ const ItemForm = (props) => {
             component={renderInput}
             label="Enter Item Price"
           />
-          <Field
+          {/* <Field
             name="menu_id"
             component={renderDropDown}
             label="Select Which Menu the Item Belongs To"
             options={props.options}
-          />
+          /> */}
           <button className="ui primary button">Submit</button>
         </form>
       )}

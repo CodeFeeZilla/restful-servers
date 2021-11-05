@@ -1,18 +1,15 @@
 import React from "react";
-import { Button, Image, Modal } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { deleteRestaurant } from "./../redux/actions/restaurant";
+import { Button, Modal } from "semantic-ui-react";
 
-function GenericModal({ item, deleteRestaurant, handleDelete, label }) {
+function GenericModal({ item, handleDelete, label, urlParams }) {
   const [open, setOpen] = React.useState(false);
   const { title, name } = item;
 
   const onDeleteClick = () => {
-    handleDelete(item.id);
+    if (urlParams) handleDelete(urlParams.id, urlParams.menuId, item.id);
+    else handleDelete(item.id);
     setOpen(false);
   };
-
-  if (!item) return null;
 
   return (
     <Modal

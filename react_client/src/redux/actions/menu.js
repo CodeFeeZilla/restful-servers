@@ -28,8 +28,8 @@ export const createMenu = (id, formValues) => async (dispatch) => {
   history.push(`/restaurants/${id}/menus`);
 };
 
-export const editMenu = (id, formValues) => async (dispatch) => {
-  const response = await restaurantsApi.put(`/menus/${id}`, formValues);
+export const editMenu = (id, menuId, formValues) => async (dispatch) => {
+  const response = await restaurantsApi.put(`/menus/${menuId}`, formValues);
 
   dispatch({ type: types.EDIT_MENU, payload: response.data });
   history.push(`/restaurants/${id}/menus`);
@@ -39,5 +39,4 @@ export const deleteMenu = (id) => async (dispatch) => {
   await restaurantsApi.delete(`/menus/${id}`);
 
   dispatch({ type: types.DELETE_MENU, payload: id });
-  history.push(`/restaurants/${id}/menus`);
 };

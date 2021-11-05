@@ -6,9 +6,14 @@ import ItemForm from "../../ItemForm";
 import { createItem } from "../../../redux/actions/item";
 
 class ItemCreate extends React.Component {
+  componentDidMount() {
+    console.log(this.props.match.params);
+  }
+
   onSubmit = (formValues) => {
     console.log(formValues);
-    this.props.createItem(this.props.match.params.id, formValues);
+    const { id, menuId } = this.props.match.params;
+    this.props.createItem(id, menuId, formValues);
   };
 
   render() {
@@ -20,6 +25,7 @@ class ItemCreate extends React.Component {
           selectLabel="Select Which Menu the Item Belongs To"
           selectFieldName="menu_id"
           options={this.props.options}
+          menuId={this.props.match.params.menuId}
         />
       </div>
     );

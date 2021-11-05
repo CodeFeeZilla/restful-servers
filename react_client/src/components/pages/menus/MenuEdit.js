@@ -9,7 +9,8 @@ import { editMenu, fetchMenu } from "../../../redux/actions/menu";
 class MenuCreate extends React.Component {
   onSubmit = (formValues) => {
     console.log(formValues);
-    this.props.editMenu(this.props.match.params.id, formValues);
+    const { id, menuId } = this.props.match.params;
+    this.props.editMenu(id, menuId, formValues);
   };
 
   render() {
@@ -22,6 +23,7 @@ class MenuCreate extends React.Component {
           selectLabel="Select Which Restaurant Menu Belongs To"
           selectFieldName="restaurant_id"
           options={this.props.options}
+          id={this.props.match.params.id}
         />
       </div>
     );
